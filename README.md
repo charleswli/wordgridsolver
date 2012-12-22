@@ -18,3 +18,4 @@ print sorted(g.words)
 
 
 TODO: Use adjacency lists for grid navigation
+TODO: Add actual Wordament mode (disable two-letter words)

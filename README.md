@@ -3,8 +3,6 @@ wordgridsolver
 
 A Python solver for word grids (e.g. Scramble, Wordament).
 
-TODO: Use adjacency lists for grid navigation
-
 Example usage:
 
 ```python
@@ -17,3 +15,6 @@ g.find_dictionary_words(t)
 print 'Found %d words:\n' % (len(g.words))
 print sorted(g.words)
 ```
+
+
+TODO: Use adjacency lists for grid navigation

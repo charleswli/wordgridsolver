@@ -6,6 +6,23 @@ import time
 class Grid(object):
     SIZE = 4
 
+    ADJACENT_POINTS = {(0,0):[(0,1),(1,0),(1,1)],
+                       (0,1):[(0,0),(0,2),(1,0),(1,1),(1,2)],
+                       (0,2):[(0,1),(0,3),(1,1),(1,2),(1,3)],
+                       (0,3):[(0,2),(1,2),(1,3)],
+                       (1,0):[(0,0),(0,1),(1,1),(2,0),(2,1)],
+                       (1,1):[(0,0),(0,1),(0,2),(1,0),(1,2),(2,0),(2,1),(2,2)],
+                       (1,2):[(0,1),(0,2),(0,3),(1,1),(1,3),(2,1),(2,2),(2,3)],
+                       (1,3):[(0,2),(0,3),(1,2),(2,2),(2,3)],
+                       (2,0):[(1,0),(1,1),(2,1),(3,0),(3,1)],
+                       (2,1):[(1,0),(1,1),(2,2),(2,0),(2,2),(3,0),(3,1),(3,2)],
+                       (2,2):[(1,1),(1,2),(1,3),(2,1),(2,3),(3,1),(3,2),(3,3)],
+                       (2,3):[(1,2),(1,3),(2,2),(3,2),(3,3)],
+                       (3,0):[(2,0),(2,1),(3,1)],
+                       (3,1):[(2,0),(2,1),(2,2),(3,0),(3,2)],
+                       (3,2):[(2,1),(2,2),(2,3),(3,1),(3,3)],
+                       (3,3):[(2,2),(2,3),(3,2)]}
+
     def __init__(self, letters='abcdefghijklmnop'):
         self.letters = letters
         self.grid = []
@@ -28,40 +45,11 @@ class Grid(object):
 
         # list possible steps to take
         valid_steps = []
+        for point in self.ADJACENT_POINTS[start_point]:
+            if point in valid_points:
+                valid_steps.append(point)
         i, j = start_point
-
-        # up 
-        if i > 0:
-            if (i-1,j) in valid_points:
-                valid_steps.append((i-1, j))
-            # up-left
-            if j > 0 and (i-1,j-1) in valid_points:
-                valid_steps.append((i-1, j-1))
-
-            # up-right
-            if j < (Grid.SIZE-1) and (i-1,j+1) in valid_points:
-                valid_steps.append((i-1, j+1))
-
-        # down
-        if i < (Grid.SIZE-1):
-            if (i+1,j) in valid_points:
-                valid_steps.append((i+1, j))
-            # down-left
-            if j > 0 and (i+1,j-1) in valid_points:
-                valid_steps.append((i+1, j-1))
-            # down-right
-            if j < (Grid.SIZE-1) and (i+1,j+1) in valid_points:
-                valid_steps.append((i+1, j+1))
-
-        # left
-        if j > 0:
-            if (i,j-1) in valid_points:
-                valid_steps.append((i, j-1))
-        # right
-        if j < (Grid.SIZE-1):
-            if (i,j+1) in valid_points:
-                valid_steps.append((i, j+1))
-        
+      
         # check if trie path exists for each valid step
         for step in valid_steps:
             k, l = step

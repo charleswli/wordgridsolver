@@ -61,7 +61,9 @@ class Trie(object):
                 curRef = curRef.letters[letter]
             else:
                 return False
-        return True
+        if curRef.is_word:
+            return True
+        return False
             
 def main():
     print "Loading dictionary file..."
@@ -73,6 +75,7 @@ def main():
     print 'blah in trie: ', t.has_word('blah')
     print 'goodbye in trie: ', t.has_word('goodbye')
     print 'asdf in trie: ', t.has_word('asdf')
+    print 'goobe in trie: ', t.has_word('goobe')
 
 if __name__ == '__main__':
     main()

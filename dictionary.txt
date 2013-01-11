@@ -122733,6 +122733,7 @@ rainwater
 rainwaters
 rainwear
 rainy
+rais
 raisable
 raise
 raised
@@ -166376,6 +166377,9 @@ verruca
 verrucae
 verrucose
 versal
+vers
+versa
+versan
 versant
 versants
 versatile

@@ -46,7 +46,6 @@ class Grid(object):
     def suffix_from_point(self, node, valid_points, start_point, prefix):
         # base case
         if node.is_word:
-            print prefix, valid_points, start_point
             self.words.append(prefix)
 
         # ensure we don't step in same square twice
@@ -57,11 +56,9 @@ class Grid(object):
         for point in self.ADJACENT_POINTS[start_point]:
             if point in valid_points:
                 valid_steps.append(point)
-#        i, j = start_point
       
         # check if trie path exists for each valid step
         for step in valid_steps:
-            print valid_steps
             k, l = step
             tile = self.grid[k][l]
             if len(tile) > 1:
@@ -74,13 +71,7 @@ class Grid(object):
                 self.suffix_from_point(curNode, valid_points[:], (k,l), prefix+tile)
             else:
                 if tile in node.letters.keys():
-                    print node.letters.keys()
                     self.suffix_from_point(node.letters[tile], valid_points[:], (k,l), prefix+tile)
-
-            # letter = self.grid[k][l]
-            # if letter in node.letters.keys():
-            #     self.suffix_from_point(node.letters[letter], valid_points[:], (k,l), prefix+letter)
-
 
     # find words in grid that exist in given trie
     def find_dictionary_words(self, loaded_trie):
@@ -93,7 +84,6 @@ class Grid(object):
         # iterate through valid starting points and take steps
         for i in xrange(Grid.SIZE):
             for j in xrange(Grid.SIZE):
-                print "starting point:", i,j
                 # take steps
                 letter = self.grid[i][j]
                 if letter in loaded_trie.root.letters:
@@ -106,8 +96,7 @@ def main():
     print 'Loading dictionary into trie...'
     start = time.time()
     t = trie.Trie()
-#    t.load_file('dictionary.txt')
-    t.load_file('testdict.txt')
+    t.load_file('dictionary.txt')
     end = time.time()
     print "Loaded dictionary in %ss\n" % (end-start)
 
@@ -116,7 +105,6 @@ def main():
     g = Grid('acedbrsaetelsard')
     g.find_dictionary_words(t)
     end = time.time()
-    #print sorted(g.words)
     print 'Found %d words in %ss ' % (len(g.words), end-start)
 
     print 'Finding words in grid:\nvnmi\nteas\nspr(qu)\neknt\n'
@@ -124,10 +112,8 @@ def main():
     g = Grid('vnmiteasspr(qu)eknt')
     g.find_dictionary_words(t)
     end = time.time()
-    print sorted(g.words)
+    #print sorted(g.words)
     print 'Found %d words in %ss ' % (len(g.words), end-start)
-    print 'squarest' in g.words
-    print 'siamese' in g.words
                     
 if __name__ == '__main__':
     main()

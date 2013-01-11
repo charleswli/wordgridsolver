@@ -16,7 +16,4 @@ print 'Found %d words:\n' % (len(g.words))
 print sorted(g.words)
 ```
 
-
-TODO: Use adjacency lists for grid navigation.
-
 TODO: Add actual Wordament mode (disable two-letter words).
